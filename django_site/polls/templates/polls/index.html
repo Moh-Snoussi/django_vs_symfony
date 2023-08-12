@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block header %}Django{% endblock %}
+
+{% block content %}
+
+    <h2>Questions</h2>
+
+    {% for question in object_list %}
+        {# @var question \App\Entity\PollsQuestion #}
+        <div class="question">
+        <h3>{{ question.question_text }}</h3>
+
+        {% for choice in question.choice_set.all %}
+        {# @var choice \App\Entity\PollsChoice #}
+                <div class="choice">
+                    <label for="choice_{{ choice.id }}">{{ choice.choice_text }}</label>
+                    <input type="radio" name="choice" value="{{ choice.id }}" id="choice_{{ choice.id }}">
+                </div>
+                {% endfor %}
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

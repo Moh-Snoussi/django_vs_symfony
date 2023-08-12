@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}Symfony{% endblock %}
+
+{% block content %}
+
+    <h2>Questions</h2>
+
+    {% for question in questions %}
+        {# @var question \App\Entity\PollsQuestion #}
+        <div class="question">
+        <h3>{{ question.questionText}}</h3>
+
+        {% for choice in question.choices %}
+        {# @var choice \App\Entity\PollsChoice #}
+                <div class="choice">
+                    <label for="choice_{{ choice.id }}">{{ choice.choiceText }}</label>
+                    <input type="radio" name="choice" value="{{ choice.id }}" id="choice_{{ choice.id }}">
+                </div>
+                {% endfor %}
+        </div>
+
+    {% endfor %}
+
+{% endblock %}
