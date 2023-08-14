@@ -6,18 +6,18 @@
 
     <h2>Questions</h2>
 
+    {# @var question \App\Entity\PollsQuestion #}
     {% for question in questions %}
-        {# @var question \App\Entity\PollsQuestion #}
         <div class="question">
-        <h3>{{ question.questionText}}</h3>
+            <h3>{{ question.questionText }}</h3>
 
-        {% for choice in question.choices %}
-        {# @var choice \App\Entity\PollsChoice #}
-                <div class="choice">
-                    <label for="choice_{{ choice.id }}">{{ choice.choiceText }}</label>
-                    <input type="radio" name="choice" value="{{ choice.id }}" id="choice_{{ choice.id }}">
-                </div>
-                {% endfor %}
+            {# @var choice \App\Entity\PollsChoice #}
+            {% for choice in question.choices %}
+                    <div class="choice">
+                        <label for="choice_{{ choice.id }}">{{ choice.choiceText }}</label>
+                        <input type="radio" name="choice" value="{{ choice.id }}" id="choice_{{ choice.id }}">
+                    </div>
+            {% endfor %}
         </div>
 
     {% endfor %}
