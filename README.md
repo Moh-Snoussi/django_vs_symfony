@@ -16,6 +16,7 @@ Both applications has the same functionality: displaying a list of questions and
 - virtualenv
 - PHP 8.2
 - Composer
+- Jmeter
 
 ## Installation
 
@@ -142,97 +143,12 @@ sudo systemctl reload apache2
 http://localhost/django/
 ```
 
-## Benchmarking
-### 50 concurrent requests, 100 total requests
+## Jmeter
+Jmeter is a tool for load testing web applications. It can be also used to test the performance of multiple applications and compare them.
+
+1. Install Jmeter
 ```bash
-ab -n100 -c50 -g django.tsv localhost/django
-This is ApacheBench, Version 2.3 <$Revision: 1843412 $>
-Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
-Licensed to The Apache Software Foundation, http://www.apache.org/
-
-Benchmarking localhost (be patient).....done
-
-
-Server Software:        Apache/2.4.41
-Server Hostname:        localhost
-Server Port:            80
-
-Document Path:          /django
-Document Length:        16209 bytes
-
-Concurrency Level:      50
-Time taken for tests:   2.339 seconds
-Complete requests:      100
-Failed requests:        0
-Total transferred:      1652900 bytes
-HTML transferred:       1620900 bytes
-Requests per second:    42.76 [#/sec] (mean)
-Time per request:       1169.426 [ms] (mean)
-Time per request:       23.389 [ms] (mean, across all concurrent requests)
-Transfer rate:          690.15 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        0    1   1.0      1       2
-Processing:    44  918 334.2   1098    1354
-Waiting:       42  910 334.4   1090    1312
-Total:         44  919 333.7   1098    1356
-
-Percentage of the requests served within a certain time (ms)
-  50%   1098
-  66%   1146
-  75%   1159
-  80%   1177
-  90%   1206
-  95%   1233
-  98%   1263
-  99%   1356
- 100%   1356 (longest request)
-
+sudo apt install jmeter
 ```
 
-### 50 concurrent requests, 500 total requests
-```bash
-ab -n100 -c50 -g django.tsv localhost/django
-This is ApacheBench, Version 2.3 <$Revision: 1843412 $>
-Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
-Licensed to The Apache Software Foundation, http://www.apache.org/
-
-Benchmarking localhost (be patient).....done
-
-
-Server Software:        Apache/2.4.41
-Server Hostname:        localhost
-Server Port:            80
-
-Document Path:          /django
-Document Length:        16209 bytes
-
-Concurrency Level:      50
-Time taken for tests:   2.339 seconds
-Complete requests:      100
-Failed requests:        0
-Total transferred:      1652900 bytes
-HTML transferred:       1620900 bytes
-Requests per second:    42.76 [#/sec] (mean)
-Time per request:       1169.426 [ms] (mean)
-Time per request:       23.389 [ms] (mean, across all concurrent requests)
-Transfer rate:          690.15 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        0    1   1.0      1       2
-Processing:    44  918 334.2   1098    1354
-Waiting:       42  910 334.4   1090    1312
-Total:         44  919 333.7   1098    1356
-
-Percentage of the requests served within a certain time (ms)
-  50%   1098
-  66%   1146
-  75%   1159
-  80%   1177
-  90%   1206
-  95%   1233
-  98%   1263
-  99%   1356
- 100%   1356 (longest request)
+Jmeter configuration can be found in the jmeter directory.
