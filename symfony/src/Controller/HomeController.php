@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_hello')]
+    #[Route('/', name: 'app_home')]
     public function index(PollsQuestionRepository $questionRepo): Response
     {
         /** @var PollsQuestion[] $questions */

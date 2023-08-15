@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\PollsQuestionRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Console\Question\ChoiceQuestion;
 
 #[ORM\Entity(repositoryClass: PollsQuestionRepository::class)]
 class PollsQuestion
