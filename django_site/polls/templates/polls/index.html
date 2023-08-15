@@ -12,11 +12,16 @@
 
             {% for choice in question.choice_set.all %}
                     <div class="choice">
-                        <label for="choice_{{ choice.id }}">{{ choice.choice_text }}</label>
-                        <input type="radio" name="choice" value="{{ choice.id }}" id="choice_{{ choice.id }}">
+                        <label
+                            for="choice_{{ choice.id }}">
+                            {{ choice.choice_text }}
+                        </label>
+                        <input type="radio"
+                            name="choice"
+                            value="{{ choice.id }}"
+                            id="choice_{{ choice.id }}">
                     </div>
             {% endfor %}
         </div>
     {% endfor %}
-
 {% endblock %}
