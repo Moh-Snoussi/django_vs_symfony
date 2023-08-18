@@ -1,12 +1,26 @@
 # Symfony vs Django
 
+### Table of contents
+- [Description](#description)
+- [Project structure](#project-structure)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Benchmarking with Jmeter](#benchmarking-with-jmeter)
+
 ## Description
-This repository contains a simple application written in Symfony and Django. The goal is to compare the performance of both frameworks.
-Both applications should be running on the same server, using the same database, same data and the same webserver (Apache).
+This repository contains two simple applications written in Symfony and Django. The goal is to compare the performance of both frameworks.
 Both applications has the same functionality: displaying a list of questions and related choices, and has the bare minimum requirements of an MVC application:
-- Models: Connecting to a mysql database
-- Views: using the template engine
+- Models: ORM and Connecting to a database
+- Views: using a template engine
 - Controllers: using the a kind of routing mechanism
+
+## Project structure
+- apache_virtualhosts: contains the apache virtual hosts configuration files
+- django_site: contains the django application
+- mysql_dumps: contains the mysql database dump
+- symfony_app: contains the symfony application
+- jmeter: contains the jmeter configuration files
+
 
 ## Requirements
 - Apache2, with mod_php-fpm, mod_wsgi and mod_rewrite enabled
@@ -44,7 +58,7 @@ mysql -u django_symfony -p django_symfony < django_symfony.sql
 #### Installation
 1. Create a virtual environment
 ```bash
-vitualenv -p python3.8 .venv
+vitualenv -p python3.10 .venv
 ```
 2. Activate the virtual environment
 ```bash
@@ -54,7 +68,9 @@ pipenv shell
 3. Install the requirements
 ```bash
 pipenv install
+sudo chown -R www-data:www-data django_site
 ```
+
 #### Server configuration
 1. adjust the apache_virtualhosts/django_app.conf file to your needs
 2. copy it to the apache configuration directory:
@@ -65,6 +81,7 @@ sudo cp django_app.conf /etc/apache2/sites-available/django_app.conf
 
 3. Enable the site
 ```bash
+sude a2dissite 000-default.conf
 sudo a2ensite django_app.conf
 sudo systemctl reload apache2
 ```
@@ -96,59 +113,60 @@ sudo cp symfony_app.conf /etc/apache2/sites-available/symfony_app.conf
 sudo a2ensite symfony_app.conf
 # disable python app
 sudo a2dissite django_app.conf
+sudo a2dissite 000-default.conf
 sudo systemctl reload apache2
 ```
 
+# Benchmarking with Jmeter
 
-## Results
-Page load time: 0.80 ~ 0.140 seconds
-
-## Requirements
-- git
-- Python 3.8
-- virtualenv
-- pipenv
-
-## Installation
-1. Clone the repository
+1. Install [Jmeter](https://jmeter.apache.org)
+2. Install the [Jmeter plugins manager](https://jmeter-plugins.org/wiki/PluginsManager/)
+3. Install the [Jmeter PerfMon plugin](https://jmeter-plugins.org/wiki/PerfMon/)
+4. Lunch PerfMon Agent on the server
 ```bash
-git clone
+./jmeter/ServersAgent-2.2.3/startAgent.sh
+# as default, the agent will listen on port 4444
 ```
+5. Adjust the Jmeter configuration to your needs from ./jmeter/TestPlan.jmx
 
-2. Create a virtual environment
-```bash
-virtualenv -p python3.8 .venv
-```
+[![Django vs Symfony Shock Unexpected](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=RuE8O7cw1yc)
 
-3. Install the requirements
-```bash
-pipevn install
-```
 
-4. Run the migrations
-```bash
-python manage.py migrate
-```
-5. Configure the server:
-Adjust the apache_virtualhost/django_app.conf file to your needs and copy it to the apache configuration directory: /etc/apache2/sites-available/
+### Results:
+Servers specifications:
+- ec2 instances (t2.micro) 1 vCPU, 1GB RAM
 
-6. Enable the site
-```bash
-sudo a2ensite django_app.conf
-sudo systemctl reload apache2
-```
+#### Settings
+- 20 concurrent users
+- ramp-up period: 10 seconds
+- duration: 15 seconds
 
-7. test the app
-```bash
-http://localhost/django/
-```
+#### Response time over time:
+![response_time_over_time](jmeter/imgs/response_time_over_time_c20.png)
 
-## Jmeter
-Jmeter is a tool for load testing web applications. It can be also used to test the performance of multiple applications and compare them.
+#### Perfmom metrics:
+![perfmom_metrics](jmeter/imgs/cpu_c20.png)
+red: Django
+blue: Symfony
 
-1. Install Jmeter
-```bash
-sudo apt install jmeter
-```
+#### Settings
+- 50 concurrent users
+- ramp-up period: 10 seconds
+- duration: 15 seconds
 
-Jmeter configuration can be found in the jmeter directory.
+#### Response time over time:
+![response_time_over_time](jmeter/imgs/response_time_over_time_c50.png)
+
+#### Perfmom metrics:
+![perfmom_metrics](jmeter/imgs/cpu_c50.png)
+
+#### Settings
+How many concurrent users can the applications handle before reaching 90% of CPU usage?
+
+The results are:
+- Django: 10
+- Symfony: 180
+
+## Conclusion
+as Objective as I can be, and based on my tests, I can say:
+Symfony/Php is to much faster, and efficient than Django/Python.
