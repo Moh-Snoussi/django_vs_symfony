@@ -129,7 +129,7 @@ sudo systemctl reload apache2
 ```
 5. Adjust the Jmeter configuration to your needs from ./jmeter/TestPlan.jmx
 
-[![Django vs Symfony Shock Unexpected](https://img.youtube.com/vi/RuE8O7cw1yc/0.jpg)](https://www.youtube.com/watch?v=RuE8O7cw1yc)
+[![Django vs Symfony Shock Unexpected](https://img.youtube.com/vi/RuE8O7cw1yc/0.jpg)](https://www.youtube.com/watch?v=RuE8O7cw1yc "Open youtube video: Django vs Symfony")
 
 
 ### Results:
