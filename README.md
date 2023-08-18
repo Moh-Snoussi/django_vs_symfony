@@ -12,7 +12,7 @@ This repository contains two simple applications written in Symfony and Django. 
 Both applications has the same functionality: displaying a list of questions and related choices, and has the bare minimum requirements of an MVC application:
 - Models: ORM and Connecting to a database
 - Views: using a template engine
-- Controllers: using the a kind of routing mechanism
+- Controllers: Business logic and routing mechanism
 
 ## Project structure
 - apache_virtualhosts: contains the apache virtual hosts configuration files
