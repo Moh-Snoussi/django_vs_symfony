@@ -146,8 +146,8 @@ Servers specifications:
 
 #### Perfmom metrics:
 ![perfmom_metrics](jmeter/imgs/cpu_c20.png)
-red: Django
-blue: Symfony
+- red: Django
+- blue: Symfony
 
 #### Settings
 - 50 concurrent users
@@ -159,6 +159,8 @@ blue: Symfony
 
 #### Perfmom metrics:
 ![perfmom_metrics](jmeter/imgs/cpu_c50.png)
+- red: Django
+- blue: Symfony
 
 #### Settings
 How many concurrent users can the applications handle before reaching 90% of CPU usage?
