@@ -25,7 +25,7 @@ Both applications has the same functionality: displaying a list of questions and
 ## Requirements
 - Apache2, with mod_php-fpm, mod_wsgi and mod_rewrite enabled
 - MySQL 8.0
-- Python 3.8
+- Python 3.10
 - pipenv
 - virtualenv
 - PHP 8.2
